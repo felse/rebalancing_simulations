@@ -1,0 +1,25 @@
+this is the readme file to create your own rebalancing simulations.
+this repository contains two subdirectories:
+
+1) simulations
+create simulations, requires the xtreemfs colocation client package to provide the rebalancing algorithms.
+it is available at https://github.com/felse/xtreemfs_colocation_client 
+
+2) R_analysis
+create statistics from the simulation results and print plots as pdf files.
+if there is exactly one simulation, it will print detailed results of the one simulations; it is not recommended to use a lot of folders (>> 100) or servers (>> 10).
+if there is more than one simulation, average statstics will be displayed.
+
+the following steps should reproduce the results of the paper:
+N  ) install software (python + xtreemfs_colocation_client, R with the required packages)
+i  ) execute simulations/minimal_split_sizes.sh
+ii ) copy the generated file to R_analysis/
+iii) execute R_analysis/r_makespans.R and R_analysis/r_total_size_moved.sh
+iv ) the plots should then be located in R_analysis/pdfs/ 
+
+in order to run simulations with your own parameters, you may edit the following files:
+- simulations/minimal_split_sizes.sh is the script you want to edit for most purposes. you can also use it to look up the command line syntax for simulations/Simulator.py. if you use this script, make sure to first generate input files using simulations/InputGenerator.py. 
+- simulations/InputGenerator.py yields some basic options to modify the set of folders used for the simulations
+- simulations/Simulator.py runs the simulations. some options can only be set by modifying the source code.
+
+note that changing the simulation parameters will likely change the simulation result output file name. so make sure to also adapt the R scripts accordingly if you want to create statistics/plots with them.
